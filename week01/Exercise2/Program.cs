@@ -8,8 +8,10 @@ class Program
 
         int grade = int.Parse(Console.ReadLine());
 
-        string letter;
+        string letter = "";
+        string sign = "";
 
+        // Determine letter grade
         if (grade >= 90)
         {
             letter = "A";
@@ -31,8 +33,34 @@ class Program
             letter = "F";
         }
 
-        Console.WriteLine($"Your grade is {letter}");
+        // Find last digit
+        int lastDigit = grade % 10;
 
+        // Determine sign
+        if (lastDigit >= 7)
+        {
+            sign = "+";
+        }
+        else if (lastDigit < 3)
+        {
+            sign = "-";
+        }
+
+        // Special cases
+        if (letter == "A" && sign == "+")
+        {
+            sign = "";
+        }
+
+        if (letter == "F")
+        {
+            sign = "";
+        }
+
+        // Final output
+        Console.WriteLine($"Your grade is {letter}{sign}");
+
+        // Pass or fail
         if (grade >= 70)
         {
             Console.WriteLine("Congratulations! You passed the course.");
