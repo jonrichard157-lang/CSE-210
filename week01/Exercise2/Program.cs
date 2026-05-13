@@ -4,70 +4,43 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("What is your grade percentage? ");
+        string playAgain = "yes";
 
-        int grade = int.Parse(Console.ReadLine());
+        while (playAgain == "yes")
+        {
+            Random randomGenerator = new Random();
+            int magicNumber = randomGenerator.Next(1, 101);
 
-        string letter = "";
-        string sign = "";
+            int guess = 0;
+            int guessCount = 0;
 
-        // Determine letter grade
-        if (grade >= 90)
-        {
-            letter = "A";
-        }
-        else if (grade >= 80)
-        {
-            letter = "B";
-        }
-        else if (grade >= 70)
-        {
-            letter = "C";
-        }
-        else if (grade >= 60)
-        {
-            letter = "D";
-        }
-        else
-        {
-            letter = "F";
-        }
+            while (guess != magicNumber)
+            {
+                Console.Write("What is your guess? ");
+                guess = int.Parse(Console.ReadLine());
 
-        // Find last digit
-        int lastDigit = grade % 10;
+                guessCount++;
 
-        // Determine sign
-        if (lastDigit >= 7)
-        {
-            sign = "+";
-        }
-        else if (lastDigit < 3)
-        {
-            sign = "-";
+                if (guess < magicNumber)
+                {
+                    Console.WriteLine("Higher");
+                }
+                else if (guess > magicNumber)
+                {
+                    Console.WriteLine("Lower");
+                }
+                else
+                {
+                    Console.WriteLine("You guessed it!");
+                }
+            }
+
+            Console.WriteLine($"You guessed it in {guessCount} guesses.");
+
+            Console.Write("Do you want to play again? ");
+            playAgain = Console.ReadLine().ToLower();
         }
 
-        // Special cases
-        if (letter == "A" && sign == "+")
-        {
-            sign = "";
-        }
-
-        if (letter == "F")
-        {
-            sign = "";
-        }
-
-        // Final output
-        Console.WriteLine($"Your grade is {letter}{sign}");
-
-        // Pass or fail
-        if (grade >= 70)
-        {
-            Console.WriteLine("Congratulations! You passed the course.");
-        }
-        else
-        {
-            Console.WriteLine("Keep trying! You will do better next time.");
-        }
+        Console.WriteLine("Thanks for playing!");
     }
 }
